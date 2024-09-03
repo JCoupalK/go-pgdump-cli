@@ -2,9 +2,19 @@
 
 CLI tool using the library
 
-## Usage of go-pgdump-cli:
+## Usage of go-pgdump-cli
 
--  `-csv` bool, dump to CSV
+- `-u` string, username for PostgreSQL
+
+- `-p` string, password for PostgreSQL
+
+- `-h` string, hostname for PostgreSQL
+
+- `-d` string, database name for PostgreSQL
+
+- `-P` string, port number for PostgreSQL (default 5432)
+
+- `-csv` bool, dump to CSV
 
 - `-o` string, path to output directory
 
@@ -16,16 +26,16 @@ CLI tool using the library
 
 - `-tables` string, comma-separated list of table names to dump to CSV
 
-### Usage for a database dump
+### Usage for a database dump with default port
 
 ```bash
-./go-pgdump-cli -o test -sx example -px test -s myschema
+./go-pgdump-cli -u user -p example -h localhost -d test -o test -sx example -px test -s myschema
 ```
 
-### Usage for a CSV dump
+### Usage for a CSV dump with custom port
 
 ```bash
-./go-pgdump-cli -o test -csv -tables employees,departments
+./go-pgdump-cli -u user -p example -h localhost -d test -P 5433 -o test -csv -tables employees,departments
 ```
 
 ## License
