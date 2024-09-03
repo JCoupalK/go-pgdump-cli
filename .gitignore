@@ -1,2 +1,16 @@
 test/
+build/
+releases/
+release-build-go.sh
 go-pgdump-cli
+
+# Go specific
+go.work
+*.test
+*.out
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+vendor/
