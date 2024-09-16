@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"log"
 	"path/filepath"
-	"strings"
 	"time"
 
 	"github.com/JCoupalK/go-pgdump"
@@ -18,7 +17,6 @@ var (
 	db        = flag.String("d", "", "database name for PostgreSQL")
 	port      = flag.Int("P", 5432, "port number for PostgreSQL")
 	dumpCSV   = flag.Bool("csv", false, "dump to CSV")
-	csvTables = flag.String("tables", "", "comma-separated list of table names to dump to CSV")
 	outputDIR = flag.String("o", "", "path to output directory")
 	suffix    = flag.String("sx", "", "suffix of table names for dump")
 	prefix    = flag.String("px", "", "prefix of table names for dump")
@@ -35,12 +33,16 @@ func BackupPostgreSQL(username, password, hostname, dbname, outputDir string, po
 
 	// Check if CSV dump is requested
 	if *dumpCSV {
-		tableList := strings.Split(*csvTables, ",")
-		csvFiles, err := dumper.DumpToCSV(outputDir, tableList...)
+		// Dump all tables to CSV files in the output directory
+		err := dumper.DumpDBToCSV(*outputDIR, "go-pgdump.log", &pgdump.TableOptions{
+			TableSuffix: *suffix,
+			TablePrefix: *prefix,
+			Schema:      *schema,
+		})
 		if err != nil {
 			log.Fatal("Error dumping to CSV:", err)
 		}
-		fmt.Println("CSV files successfully saved in:", csvFiles)
+		fmt.Println("CSV files successfully saved in:", *outputDIR)
 	} else {
 		// Regular SQL dump
 		currentTime := time.Now()
@@ -63,7 +65,10 @@ func BackupPostgreSQL(username, password, hostname, dbname, outputDir string, po
 
 func main() {
 	flag.Parse()
-	outputDir := *outputDIR
 
-	BackupPostgreSQL(*username, *password, *hostname, *db, outputDir, *port)
+	if *outputDIR == "" {
+		log.Fatal("Output directory (-o) must be specified")
+	}
+
+	BackupPostgreSQL(*username, *password, *hostname, *db, *outputDIR, *port)
 }

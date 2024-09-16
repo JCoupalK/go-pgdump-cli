@@ -3,6 +3,7 @@ build/
 releases/
 release-build-go.sh
 go-pgdump-cli
+go.mod
 
 # Go specific
 go.work
