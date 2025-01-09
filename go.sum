@@ -1,3 +1,5 @@
+github.com/JCoupalK/go-pgdump v1.1.0 h1:G7PT6dO63HXeW5aWVpPysup8yJzdwYPP4ds/dEa/02A=
+github.com/JCoupalK/go-pgdump v1.1.0/go.mod h1:f2Vjwm5XmmpUCPW8azzg38C+UUXZyW1J/z1mk+tf4cc=
 github.com/lib/pq v1.10.9 h1:YXG7RB+JIjhP29X+OtkiDnYaXQwpS4JEWq7dtCCRUEw=
 github.com/lib/pq v1.10.9/go.mod h1:AlVN5x4E4T544tWzH6hKfbfQvm3HdbOxrmggDNAPY9o=
 golang.org/x/sync v0.8.0 h1:3NFvSEYkUoMifnESzZl15y791HH1qU2xm6eCJU5ZPXQ=
